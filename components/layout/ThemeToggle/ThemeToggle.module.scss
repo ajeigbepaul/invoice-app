@@ -1,0 +1,29 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.toggle {
+  @include button-reset;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all $transition-fast;
+
+  svg {
+    transition: transform $transition-normal;
+  }
+
+  &:hover {
+    svg {
+      transform: rotate(20deg) scale(1.1);
+    }
+  }
+
+  &:active {
+    svg {
+      transform: rotate(20deg) scale(0.95);
+    }
+  }
+}

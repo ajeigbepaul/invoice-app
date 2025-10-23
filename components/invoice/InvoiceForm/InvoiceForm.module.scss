@@ -1,6 +1,6 @@
 // src/components/invoice/InvoiceForm/InvoiceForm.module.scss
-@import '../../../styles/variables.scss';
-@import '../../../styles/mixins.scss';
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
 
 .form {
   width: 100%;

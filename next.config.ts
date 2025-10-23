@@ -2,13 +2,15 @@
 const nextConfig = {
   // Enable SCSS support
   sassOptions: {
-    includePaths: ['./styles'],
-    prependData: `@import "variables.scss"; @import "mixins.scss";`,
+    includePaths: ["./styles"],
+    prependData: `@use "@/styles/variables" as *; @use "@/styles/mixins" as *;`,
   },
-  
+
   // Experimental features
   experimental: {
-    serverActions: true,
+    serverActions: {
+      allowedOrigins: ["localhost:3000"],
+    },
   },
 
   // Image configuration

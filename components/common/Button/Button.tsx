@@ -1,29 +1,31 @@
 // src/components/common/Button/Button.tsx
-import React from 'react';
-import styles from './Button.module.scss';
+import React from "react";
+import styles from "./Button.module.scss";
 
 export interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'danger' | 'dark' | 'tertiary';
-  size?: 'small' | 'medium' | 'large';
+  variant?: "primary" | "secondary" | "danger" | "dark" | "tertiary";
+  size?: "small" | "medium" | "large";
   fullWidth?: boolean;
   disabled?: boolean;
   loading?: boolean;
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
   icon?: React.ReactNode;
+  className?: string;
 }
 
 export default function Button({
   children,
-  variant = 'primary',
-  size = 'medium',
+  variant = "primary",
+  size = "medium",
   fullWidth = false,
   disabled = false,
   loading = false,
-  type = 'button',
+  type = "button",
   onClick,
   icon,
+  className: customClassName,
 }: ButtonProps) {
   const className = [
     styles.button,
@@ -32,9 +34,10 @@ export default function Button({
     fullWidth && styles.fullWidth,
     loading && styles.loading,
     disabled && styles.disabled,
+    customClassName,
   ]
     .filter(Boolean)
-    .join(' ');
+    .join(" ");
 
   return (
     <button
@@ -49,4 +52,3 @@ export default function Button({
     </button>
   );
 }
-

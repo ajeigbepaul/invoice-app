@@ -1,0 +1,60 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.header {
+  @include flex-between;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-xl;
+
+  @media (max-width: 768px) {
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.info {
+  flex: 1;
+}
+
+.title {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: var(--text-primary);
+  margin: 0 0 $spacing-xs 0;
+
+  @media (max-width: 768px) {
+    font-size: $font-size-xl;
+  }
+}
+
+.subtitle {
+  font-size: $font-size-sm;
+  color: var(--text-tertiary);
+  margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: $font-size-xs;
+  }
+}
+
+.statusText {
+  text-transform: capitalize;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+
+  @media (max-width: 768px) {
+    gap: $spacing-md;
+  }
+}
+
+.buttonText {
+  .hideOnMobile {
+    @media (max-width: 640px) {
+      display: none;
+    }
+  }
+}

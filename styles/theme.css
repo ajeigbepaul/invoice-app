@@ -1,6 +1,8 @@
-/* Light Theme */
+/* Light Theme (Default) */
 :root[data-theme="light"],
-body[data-theme="light"] {
+body[data-theme="light"],
+:root,
+body {
   --primary-color: #9277ff;
   --primary-color-rgb: 146, 119, 255;
   --primary-color-alt: #7c5dfa;
@@ -21,11 +23,9 @@ body[data-theme="light"] {
   --toast-border: #dfe3fa;
 }
 
-/* Dark Theme (Default) */
+/* Dark Theme */
 :root[data-theme="dark"],
-body[data-theme="dark"],
-:root,
-body {
+body[data-theme="dark"] {
   --primary-color: #9277ff;
   --primary-color-rgb: 146, 119, 255;
   --primary-color-alt: #7c5dfa;

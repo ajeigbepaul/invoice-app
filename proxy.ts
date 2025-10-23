@@ -1,9 +1,9 @@
 import { withAuth } from "next-auth/middleware";
 import { NextRequest } from "next/server";
 
-export const middleware = withAuth(
-  function middleware(req: NextRequest) {
-    // This middleware runs only for authenticated users
+export const proxy = withAuth(
+  function proxy(req: NextRequest) {
+    // This proxy runs only for authenticated users
     // The withAuth middleware handles unauthenticated users by redirecting to login
   },
   {

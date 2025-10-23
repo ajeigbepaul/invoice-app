@@ -1,0 +1,82 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.page {
+  padding: 2rem;
+  max-width: 100%;
+  margin: 0 auto;
+
+  @include mobile {
+    padding: 1.5rem 1rem;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4rem;
+  gap: 2rem;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 2rem;
+    gap: 1.5rem;
+  }
+}
+
+.titleSection {
+  flex: 1;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+
+  @include mobile {
+    font-size: 1.5rem;
+  }
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.125rem;
+
+  @include mobile {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+.newInvoiceButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 1.5rem;
+  transition: all 0.2s ease;
+
+  svg {
+    width: 0.6875rem;
+    height: 0.6875rem;
+  }
+
+  @include mobile {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+}

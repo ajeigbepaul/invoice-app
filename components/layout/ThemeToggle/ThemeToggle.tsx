@@ -1,6 +1,6 @@
-'use client';
-import { useTheme } from '@/context/ThemeContext';
-import styles from './ThemeToggle.module.scss';
+"use client";
+import { useTheme } from "@/context/ThemeContext";
+import styles from "./ThemeToggle.module.scss";
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
@@ -9,15 +9,15 @@ export default function ThemeToggle() {
     <button
       className={styles.toggle}
       onClick={toggleTheme}
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-      title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+      title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
-      {theme === 'light' ? (
+      {theme === "light" ? (
         // Moon icon for light mode (click to go dark)
         <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M19.502 11.342a.703.703 0 00-.588.128 7.499 7.499 0 01-2.275 1.33 7.123 7.123 0 01-2.581.46A7.516 7.516 0 018.74 11.06a7.516 7.516 0 01-2.198-5.316c0-.87.153-1.713.41-2.48.28-.817.69-1.559 1.226-2.197a.652.652 0 00-.102-.92.703.703 0 00-.588-.128C5.316.79 3.213 1.82 1.67 3.408A8.957 8.957 0 000 9.185a9.165 9.165 0 002.684 6.476 9.01 9.01 0 006.476 2.684 8.957 8.957 0 005.777-1.67c1.588-1.543 2.618-3.646 2.893-5.818a.652.652 0 00-.328-.515z"
-            fill="#7E88C3"
+            fill="var(--text-secondary)"
             fillRule="nonzero"
           />
         </svg>
@@ -34,4 +34,3 @@ export default function ThemeToggle() {
     </button>
   );
 }
-

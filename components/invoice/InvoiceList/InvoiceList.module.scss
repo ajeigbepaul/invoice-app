@@ -1,12 +1,13 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
 .list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
   width: 100%;
 }
 
-@media (max-width: 768px) {
-  .list {
-    grid-template-columns: 1fr;
-  }
+.skeletonCard {
+  width: 100%;
 }

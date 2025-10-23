@@ -1,69 +1,94 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
 .card {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
   background-color: var(--bg-secondary);
-  border-radius: 0.5rem;
-  border: 1px solid var(--border-color);
+  border-radius: $border-radius-md;
+  padding: $spacing-md;
+  border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all $transition-fast;
 
   &:hover {
     border-color: var(--primary-color);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+
+  &:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
   }
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1rem;
-  gap: 1rem;
+.content {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto auto;
+  gap: $spacing-md;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-sm;
+  }
 }
 
-.invoiceNumber {
-  font-weight: 700;
+.id {
+  font-weight: $font-weight-bold;
+  font-size: $font-size-sm;
   color: var(--text-primary);
-}
 
-.clientName {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-}
-
-.body {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 1rem;
-  gap: 1rem;
+  .hash {
+    color: var(--text-tertiary);
+  }
 }
 
 .dueDate {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  font-size: $font-size-sm;
+  color: var(--text-tertiary);
+
+  @media (max-width: 768px) {
+    grid-column: 1;
+    grid-row: 2;
+  }
 }
 
-.label {
-  font-size: 0.75rem;
+.clientName {
+  font-size: $font-size-sm;
   color: var(--text-secondary);
-}
 
-.value {
-  font-size: 0.875rem;
-  color: var(--text-primary);
+  @media (max-width: 768px) {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: right;
+  }
 }
 
 .amount {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
   color: var(--text-primary);
+
+  @media (max-width: 768px) {
+    grid-column: 1;
+    grid-row: 3;
+  }
 }
 
-.footer {
+.status {
+  @media (max-width: 768px) {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+  }
+}
+
+.arrow {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  color: var(--primary-color);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }

@@ -1,6 +1,6 @@
 // src/components/invoice/InvoiceDetail/InvoiceDetail.module.scss
-@import '../../../styles/variables.scss';
-@import '../../../styles/mixins.scss';
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins' as *;
 
 .container {
   width: 100%;
