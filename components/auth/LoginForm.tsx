@@ -47,7 +47,7 @@ export default function LoginForm() {
         setErrors({ form: result.error });
       } else if (result?.ok) {
         toast.success("Login successful!");
-        router.push("/dashboard");
+        router.push("/");
       }
     } catch (error) {
       toast.error("An error occurred during login");
