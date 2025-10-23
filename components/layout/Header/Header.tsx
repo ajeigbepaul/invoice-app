@@ -26,7 +26,7 @@ export default function Header({
   const getInvoiceText = () => {
     if (invoiceCount === 0) return 'No invoices';
     if (invoiceCount === 1) return '1 invoice';
-    return `${invoiceCount} invoices`;
+    return `There are ${invoiceCount} total invoices`;
   };
 
   const getStatusText = () => {
