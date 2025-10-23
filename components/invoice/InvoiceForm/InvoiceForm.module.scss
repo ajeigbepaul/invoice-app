@@ -1,0 +1,183 @@
+// src/components/invoice/InvoiceForm/InvoiceForm.module.scss
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.form {
+  width: 100%;
+}
+
+.title {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-dark-text;
+  margin-bottom: $spacing-xl;
+
+  @media (max-width: 640px) {
+    font-size: $font-size-lg;
+  }
+}
+
+body[data-theme='dark'] .title {
+  color: $color-light-bg;
+}
+
+// Sections
+.section {
+  margin-bottom: $spacing-xl;
+
+  @media (max-width: 640px) {
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.sectionTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+  margin-bottom: $spacing-md;
+}
+
+// Form rows
+.row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+
+  > * {
+    &:first-child {
+      @media (max-width: 768px) and (min-width: 641px) {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+}
+
+// Item List
+.itemListTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  color: $color-text-light;
+  margin-bottom: $spacing-md;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+.itemRow {
+  width: 100%;
+}
+
+.itemFields {
+  display: grid;
+  grid-template-columns: 2fr 64px 100px 100px 32px;
+  gap: $spacing-md;
+  align-items: end;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: $spacing-sm;
+  }
+}
+
+.itemTotal {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding-bottom: $spacing-sm;
+
+  @media (max-width: 768px) {
+    grid-column: 1;
+    grid-row: 3;
+    padding-bottom: 0;
+  }
+}
+
+.totalLabel {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-light;
+}
+
+.totalValue {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  color: $color-text-light;
+}
+
+.deleteButton {
+  @include button-reset;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-fast;
+  margin-bottom: $spacing-sm;
+
+  svg {
+    transition: transform $transition-fast;
+  }
+
+  &:hover {
+    svg path {
+      fill: $color-danger;
+    }
+
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 768px) {
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: end;
+    margin-bottom: 0;
+  }
+}
+
+// Actions
+.actions {
+  @include flex-between;
+  gap: $spacing-md;
+  margin-top: $spacing-xl;
+  padding-top: $spacing-xl;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.submitButtons {
+  display: flex;
+  gap: $spacing-sm;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+}
+
+// Error message
+.error {
+  font-size: $font-size-xs;
+  color: $color-danger;
+  display: block;
+  margin-top: $spacing-xs;
+}

@@ -1,0 +1,103 @@
+// src/components/common/Loader/Loader.module.scss
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  padding: $spacing-lg;
+}
+
+.fullScreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: $z-index-modal;
+}
+
+.spinner {
+  position: relative;
+  display: inline-block;
+
+  &.small {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.medium {
+    width: 40px;
+    height: 40px;
+  }
+
+  &.large {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.circle {
+  width: 100%;
+  height: 100%;
+  border-radius: $border-radius-full;
+  border: 3px solid transparent;
+  border-top-color: $color-primary;
+  border-right-color: $color-primary;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.text {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin: 0;
+  text-align: center;
+}
+
+body[data-theme='dark'] .text {
+  color: $color-text-light;
+}
+
+// Skeleton loader
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.05) 25%,
+    rgba(0, 0, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+body[data-theme='dark'] .skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

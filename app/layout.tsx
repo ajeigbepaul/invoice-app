@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { League_Spartan } from "next/font/google";
 import "./globals.css";
+import "@/styles/theme.css";
 import ReactQueryProvider from "@/lib/react-query-provider";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { Toaster } from "react-hot-toast";

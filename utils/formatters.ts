@@ -37,3 +37,26 @@ export function calculatePaymentDue(
 export function calculateTotal(items: InvoiceItem[]): number {
   return items.reduce((sum, item) => sum + item.total, 0);
 }
+
+export function formatCurrency(amount: number): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(amount);
+}
+
+export function formatDate(date: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(new Date(date));
+}
+
+export function getInitials(name: string): string {
+  return name
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase())
+    .join("")
+    .slice(0, 2);
+}
