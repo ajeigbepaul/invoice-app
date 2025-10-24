@@ -480,29 +480,28 @@ export default function CreateInvoiceModal({
             variant="secondary"
             onClick={handleDiscard}
             className={styles.discard}
-            fullWidth
             disabled={isPending || isSubmitting}
           >
             Discard
           </Button>
-          <Button
-            type="button"
-            variant="secondary"
-            className={styles.draftButton}
-            fullWidth
-            loading={isPending}
-            onClick={() => handleSaveAsDraft()}
-          >
-            Save as Draft
-          </Button>
-          <Button
-            type="submit"
-            variant="primary"
-            fullWidth
-            loading={isPending || isSubmitting}
-          >
-            Save & Send
-          </Button>
+          <div style={{ display: "flex", gap: "1rem" }}>
+            <Button
+              type="button"
+              variant="secondary"
+              className={styles.draftButton}
+              loading={isPending}
+              onClick={() => handleSaveAsDraft()}
+            >
+              Save as Draft
+            </Button>
+            <Button
+              type="submit"
+              variant="primary"
+              loading={isPending || isSubmitting}
+            >
+              Save & Send
+            </Button>
+          </div>
         </div>
       </form>
     </Modal>

@@ -267,17 +267,32 @@ body[data-theme="dark"] .addItemButton {
   color: var(--text-tertiary);
 }
 
+// .actions {
+//   display: flex;
+//   gap: 1rem;
+//   padding-top: 1.5rem;
+//   border-top: 1px solid rgba(0, 0, 0, 0.1);
+//   margin-top: 1.5rem;
+
+//   @media (max-width: 768px) {
+//     flex-direction: column;
+//   }
+// }
 .actions {
   display: flex;
   gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   margin-top: 1.5rem;
 
   @media (max-width: 768px) {
     flex-direction: column;
+    justify-content: flex-start;
   }
 }
+
 
 body[data-theme="dark"] .actions {
   border-top-color: rgba(255, 255, 255, 0.1);
