@@ -1,34 +1,37 @@
 // src/components/invoice/InvoiceDetail/InvoiceDetail.module.scss
-@use '../../../styles/variables' as *;
-@use '../../../styles/mixins' as *;
-
 .container {
   width: 100%;
+  max-width: 730px;
+  margin: 0 auto;
 }
 
 // Status Bar
 .statusBar {
-  @include flex-between;
-  gap: $spacing-md;
-  background-color: $color-light-card;
-  padding: $spacing-md $spacing-lg;
-  border-radius: $border-radius-md;
-  margin-bottom: $spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background-color: var(--bg-secondary);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 640px) {
     flex-direction: column;
     align-items: stretch;
+    padding: 1rem;
   }
 }
 
-body[data-theme='dark'] .statusBar {
-  background-color: $color-dark-card;
+body[data-theme="dark"] .statusBar {
+  background-color: #1e2139;
 }
 
 .statusInfo {
   display: flex;
   align-items: center;
-  gap: $spacing-md;
+  gap: 1.5rem;
   flex: 1;
 
   @media (max-width: 640px) {
@@ -37,13 +40,13 @@ body[data-theme='dark'] .statusBar {
 }
 
 .statusLabel {
-  font-size: $font-size-sm;
-  color: $color-text-light;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
 }
 
 .actions {
   display: flex;
-  gap: $spacing-sm;
+  gap: 1rem;
 
   @media (max-width: 640px) {
     justify-content: space-between;
@@ -52,27 +55,28 @@ body[data-theme='dark'] .statusBar {
 
 // Invoice Details
 .details {
-  background-color: $color-light-card;
-  border-radius: $border-radius-md;
-  padding: $spacing-xl;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 640px) {
-    padding: $spacing-md;
+    padding: 1rem;
   }
 }
 
-body[data-theme='dark'] .details {
-  background-color: $color-dark-card;
+body[data-theme="dark"] .details {
+  background-color: #1e2139;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: $spacing-xl;
+  margin-bottom: 2rem;
 
   @media (max-width: 640px) {
     flex-direction: column;
-    gap: $spacing-lg;
+    gap: 1.5rem;
   }
 }
 
@@ -81,30 +85,30 @@ body[data-theme='dark'] .details {
 }
 
 .invoiceId {
-  font-size: $font-size-lg;
-  font-weight: $font-weight-bold;
-  color: $color-dark-text;
-  margin: 0 0 $spacing-xs 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
 
   .hash {
-    color: $color-text-light;
+    color: var(--text-secondary);
   }
 }
 
-body[data-theme='dark'] .invoiceId {
-  color: $color-light-bg;
+body[data-theme="dark"] .invoiceId {
+  color: var(--text-primary);
 }
 
 .description {
-  font-size: $font-size-sm;
-  color: $color-text-light;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
   margin: 0;
 }
 
 .senderAddress {
   font-style: normal;
-  font-size: $font-size-xs;
-  color: $color-text-light;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
   text-align: right;
   line-height: 1.6;
 
@@ -121,8 +125,8 @@ body[data-theme='dark'] .invoiceId {
 .meta {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: $spacing-lg;
-  margin-bottom: $spacing-xl;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 
   @media (max-width: 640px) {
     grid-template-columns: repeat(2, 1fr);
@@ -132,7 +136,7 @@ body[data-theme='dark'] .invoiceId {
 .metaItem {
   display: flex;
   flex-direction: column;
-  gap: $spacing-xs;
+  gap: 0.5rem;
 
   &:nth-child(3) {
     grid-column: 1 / 2;
@@ -152,27 +156,27 @@ body[data-theme='dark'] .invoiceId {
 }
 
 .metaLabel {
-  font-size: $font-size-sm;
-  color: $color-text-light;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
 }
 
 .metaValue {
-  font-size: $font-size-base;
-  font-weight: $font-weight-bold;
-  color: $color-dark-text;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
   margin: 0;
 }
 
-body[data-theme='dark'] .metaValue {
-  color: $color-light-bg;
+body[data-theme="dark"] .metaValue {
+  color: var(--text-primary);
 }
 
 .clientAddress {
   font-style: normal;
-  font-size: $font-size-xs;
-  color: $color-text-light;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
   line-height: 1.6;
-  margin-top: $spacing-sm;
+  margin-top: 1rem;
 
   p {
     margin: 0;
@@ -181,26 +185,27 @@ body[data-theme='dark'] .metaValue {
 
 // Items Table
 .itemsTable {
-  background-color: $color-light-bg;
-  border-radius: $border-radius-md $border-radius-md 0 0;
+  background-color: var(--bg-primary);
+  border-radius: 12px 12px 0 0;
   overflow: hidden;
+  margin-top: 1.5rem;
 
   @media (max-width: 640px) {
-    border-radius: $border-radius-md;
+    border-radius: 12px;
   }
 }
 
-body[data-theme='dark'] .itemsTable {
-  background-color: $color-dark-input;
+body[data-theme="dark"] .itemsTable {
+  background-color: #252945;
 }
 
 .tableHeader {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: $spacing-md;
-  padding: $spacing-lg;
-  font-size: $font-size-xs;
-  color: $color-text-light;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
 
   @media (max-width: 640px) {
     display: none;
@@ -208,20 +213,20 @@ body[data-theme='dark'] .itemsTable {
 }
 
 .tableBody {
-  padding: 0 $spacing-lg $spacing-lg;
+  padding: 0 1.5rem 1.5rem;
 
   @media (max-width: 640px) {
-    padding: $spacing-md;
+    padding: 1rem;
   }
 }
 
 .tableRow {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: $spacing-md;
+  gap: 1.5rem;
   align-items: center;
-  padding: $spacing-md 0;
-  font-size: $font-size-sm;
+  padding: 1rem 0;
+  font-size: 0.875rem;
 
   &:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -230,19 +235,19 @@ body[data-theme='dark'] .itemsTable {
   @media (max-width: 640px) {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
-    gap: $spacing-xs;
+    gap: 0.5rem;
   }
 }
 
-body[data-theme='dark'] .tableRow {
+body[data-theme="dark"] .tableRow {
   &:not(:last-child) {
     border-bottom-color: rgba(255, 255, 255, 0.05);
   }
 }
 
 .itemName {
-  font-weight: $font-weight-bold;
-  color: $color-dark-text;
+  font-weight: 700;
+  color: var(--text-primary);
 
   @media (max-width: 640px) {
     grid-column: 1;
@@ -250,12 +255,13 @@ body[data-theme='dark'] .tableRow {
   }
 }
 
-body[data-theme='dark'] .itemName {
-  color: $color-light-bg;
+body[data-theme="dark"] .itemName {
+  color: var(--text-primary);
 }
 
 .qty {
-  color: $color-text-light;
+  color: var(--text-secondary);
+  font-weight: 500;
   text-align: center;
 
   @media (max-width: 640px) {
@@ -266,7 +272,8 @@ body[data-theme='dark'] .itemName {
 }
 
 .price {
-  color: $color-text-light;
+  color: var(--text-secondary);
+  font-weight: 500;
   text-align: right;
 
   @media (max-width: 640px) {
@@ -277,9 +284,10 @@ body[data-theme='dark'] .itemName {
 }
 
 .total {
-  font-weight: $font-weight-bold;
-  color: $color-dark-text;
+  font-weight: 700;
+  color: var(--text-primary);
   text-align: right;
+  font-weight: 500;
 
   @media (max-width: 640px) {
     grid-column: 2;
@@ -290,53 +298,59 @@ body[data-theme='dark'] .itemName {
   }
 }
 
-body[data-theme='dark'] .total {
-  color: $color-light-bg;
+body[data-theme="dark"] .total {
+  color: var(--text-primary);
 }
 
 .tableFooter {
-  @include flex-between;
-  background-color: $color-dark-text;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #373b53;
   color: white;
-  padding: $spacing-lg;
-  border-radius: 0 0 $border-radius-md $border-radius-md;
+  padding: 1.5rem 2rem;
+  border-radius: 0 0 12px 12px;
 
   @media (max-width: 640px) {
     flex-direction: column;
     align-items: flex-start;
-    gap: $spacing-md;
+    gap: 1rem;
+    padding: 1rem;
   }
 }
 
-body[data-theme='dark'] .tableFooter {
-  background-color: #0C0E16;
+body[data-theme="dark"] .tableFooter {
+  background-color: #0c0e16;
 }
 
 .footerLabel {
-  font-size: $font-size-sm;
+  font-size: 0.875rem;
 }
 
 .footerTotal {
-  font-size: $font-size-xl;
-  font-weight: $font-weight-bold;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 // Modal
 .modalContent {
   display: flex;
   flex-direction: column;
-  gap: $spacing-md;
+  gap: 1.5rem;
 }
 
 .modalText {
-  font-size: $font-size-sm;
-  color: $color-text-light;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0;
+  font-weight: 500;
 }
 
 .modalActions {
   display: flex;
-  gap: $spacing-sm;
-  margin-top: $spacing-sm;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: center;
+  justify-content: end;
 }

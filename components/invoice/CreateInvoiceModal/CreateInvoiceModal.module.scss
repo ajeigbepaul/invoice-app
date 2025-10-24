@@ -1,0 +1,247 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 80vh;
+}
+
+.scrollableContent {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 1rem;
+  margin-right: -1rem;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.section {
+  margin-bottom: 2rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0 0 1.5rem 0;
+}
+
+.field {
+  margin-bottom: 1.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  transition: border-color 0.2s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+
+  &::placeholder {
+    color: var(--text-tertiary);
+  }
+}
+
+body[data-theme="dark"] .input {
+  background-color: #252945;
+  border-color: rgba(255, 255, 255, 0.1);
+  /* use the theme text color for inputs in dark mode so text and placeholders are readable */
+  color: var(--text-primary);
+
+  &:focus {
+    border-color: var(--primary-color);
+  }
+
+  &::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.9;
+  }
+}
+
+.itemRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: 1.5rem;
+  align-items: end;
+  margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+.totalDisplay {
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body[data-theme="dark"] .totalDisplay {
+  background-color: #252945;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--bg-primary);
+}
+
+.removeButton {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--bg-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--danger-color);
+    color: white;
+    border-color: var(--danger-color);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 0.75rem;
+  }
+}
+
+body[data-theme="dark"] .removeButton {
+  background-color: #252945;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-tertiary);
+}
+
+.draftButton {
+  /* Ensure this overrides the generic .secondary button styles */
+  background-color: #373b53 !important;
+  color: var(--text-secondary) !important;
+  border: 1px solid transparent !important;
+}
+
+.draftButton:hover {
+  filter: brightness(1.03);
+}
+
+.discard {
+  background-color: #f9fafe !important;
+  color: var(--text-secondary) !important;
+}
+
+.addItemButton {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--bg-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+  }
+}
+
+body[data-theme="dark"] .addItemButton {
+  background-color: #252945;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-tertiary);
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 1.5rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+body[data-theme="dark"] .actions {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}

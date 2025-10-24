@@ -1,17 +1,17 @@
-// src/components/common/Modal/Modal.tsx
-'use client';
+"use client";
 
-import React, { useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import styles from './Modal.module.scss';
+import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
+import styles from "./Modal.module.scss";
 
 export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
   title?: string;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   showCloseButton?: boolean;
+  variant?: "left" | "center"; // left is default (slides from left), center for confirmations
 }
 
 export default function Modal({
@@ -19,48 +19,52 @@ export default function Modal({
   onClose,
   children,
   title,
-  size = 'medium',
+  size = "medium",
   showCloseButton = true,
+  variant = "left",
 }: ModalProps) {
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isOpen]);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === "Escape" && isOpen) {
         onClose();
       }
     };
 
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
   const modalContent = (
-    <div className={styles.overlay} onClick={onClose}>
+    <div className={styles.overlay} onClick={onClose} data-variant={variant}>
       <div
         className={`${styles.modal} ${styles[size]}`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={title ? 'modal-title' : undefined}
+        aria-labelledby={title ? "modal-title" : undefined}
+        data-variant={variant}
       >
-        {title && (
+        {(title || showCloseButton) && (
           <div className={styles.header}>
-            <h2 id="modal-title" className={styles.title}>
-              {title}
-            </h2>
+            {title && (
+              <h2 id="modal-title" className={styles.title}>
+                {title}
+              </h2>
+            )}
             {showCloseButton && (
               <button
                 className={styles.closeButton}

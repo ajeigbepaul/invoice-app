@@ -1,15 +1,16 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { InvoiceStatus } from '@/types/invoice';
-import InvoiceFilter from '@/components/invoice/InvoiceFilter';
-import Button from '@/components/common/Button';
-import styles from './Header.module.scss';
+import { useState } from "react";
+import { InvoiceStatus, CreateInvoiceInput } from "@/types/invoice";
+import InvoiceFilter from "@/components/invoice/InvoiceFilter";
+import Button from "@/components/common/Button";
+import styles from "./Header.module.scss";
+import CreateInvoiceModal from "@/components/invoice/CreateInvoiceModal/CreateInvoiceModal";
 
 export interface HeaderProps {
   invoiceCount: number;
-  selectedStatus: InvoiceStatus | 'all';
-  onStatusChange: (status: InvoiceStatus | 'all') => void;
+  selectedStatus: InvoiceStatus | "all";
+  onStatusChange: (status: InvoiceStatus | "all") => void;
 }
 
 export default function Header({
@@ -17,20 +18,21 @@ export default function Header({
   selectedStatus,
   onStatusChange,
 }: HeaderProps) {
-  const router = useRouter();
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleNewInvoice = () => {
-    router.push('/invoices/new');
+    setIsCreateModalOpen(true);
   };
 
   const getInvoiceText = () => {
-    if (invoiceCount === 0) return 'No invoices';
-    if (invoiceCount === 1) return '1 invoice';
+    if (invoiceCount === 0) return "No invoices";
+    if (invoiceCount === 1) return "1 invoice";
     return `There are ${invoiceCount} total invoices`;
   };
 
   const getStatusText = () => {
-    if (selectedStatus === 'all') return '';
+    if (selectedStatus === "all") return "";
     return selectedStatus;
   };
 
@@ -40,9 +42,7 @@ export default function Header({
         <h1 className={styles.title}>Invoices</h1>
         <p className={styles.subtitle}>
           {getStatusText() && (
-            <span className={styles.statusText}>
-              {getStatusText()}{' '}
-            </span>
+            <span className={styles.statusText}>{getStatusText()} </span>
           )}
           {getInvoiceText()}
         </p>
@@ -58,10 +58,10 @@ export default function Header({
           variant="primary"
           onClick={handleNewInvoice}
           icon={
-            <svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
+            <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M6.313 10.023v-3.71h3.71v-2.58h-3.71V.023h-2.58v3.71H.023v2.58h3.71v3.71z"
-                fill="#FFF"
+                fill="var(--primary-color)"
                 fillRule="nonzero"
               />
             </svg>
@@ -72,7 +72,24 @@ export default function Header({
           </span>
         </Button>
       </div>
+
+      <CreateInvoiceModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        onSubmit={async (invoice: CreateInvoiceInput) => {
+          try {
+            setIsSubmitting(true);
+            // TODO: Implement create functionality
+            console.log("Create invoice:", invoice);
+            setIsCreateModalOpen(false);
+          } catch (error) {
+            console.error("Error creating invoice:", error);
+          } finally {
+            setIsSubmitting(false);
+          }
+        }}
+        isSubmitting={isSubmitting}
+      />
     </header>
   );
 }
-

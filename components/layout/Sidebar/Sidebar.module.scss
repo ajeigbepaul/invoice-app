@@ -7,9 +7,9 @@
   top: 0;
   width: 100px;
   height: 100vh;
-  background-color: var(
-    --bg-secondary
-  ); // Use theme variable instead of hardcoded color
+  /* Fixed dark background for the sidebar (independent of light/dark theme) */
+  background-color: $color-dark-card;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

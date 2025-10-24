@@ -1,17 +1,17 @@
-export { InvoiceStatus } from "./InvoiceStatus";
+export { default as InvoiceStatus } from "./InvoiceStatus";
 export type { InvoiceStatusProps } from "./InvoiceStatus";
-
-export { InvoiceCard } from "./InvoiceCard";
+    
+export { default as InvoiceCard } from "./InvoiceCard";
 export type { InvoiceCardProps } from "./InvoiceCard";
 
-export { InvoiceList } from "./InvoiceList";
+export { default as InvoiceList } from "./InvoiceList";
 export type { InvoiceListProps } from "./InvoiceList";
 
-export { InvoiceFilter } from "./InvoiceFilter";
+export { default as InvoiceFilter } from "./InvoiceFilter";
 export type { InvoiceFilterProps } from "./InvoiceFilter";
 
-export { InvoiceDetail } from "./InvoiceDetail";
-export type { InvoiceDetailProps, InvoiceItem } from "./InvoiceDetail";
+export { default as InvoiceDetail } from "./InvoiceDetail";
+export type { InvoiceDetailProps } from "./InvoiceDetail";
 
 export { InvoiceForm } from "./InvoiceForm";
 export type { InvoiceFormProps } from "./InvoiceForm";

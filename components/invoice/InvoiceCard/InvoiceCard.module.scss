@@ -4,10 +4,11 @@
 .card {
   background-color: var(--bg-secondary);
   border-radius: $border-radius-md;
-  padding: $spacing-md;
+  padding: $spacing-lg $spacing-md;
   border: 1px solid transparent;
   cursor: pointer;
   transition: all $transition-fast;
+  width: 100%;
 
   &:hover {
     border-color: var(--primary-color);
@@ -23,13 +24,15 @@
 
 .content {
   display: grid;
-  grid-template-columns: auto 1fr auto auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr auto;
   gap: $spacing-md;
   align-items: center;
+  width: 100%;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr 1fr;
     gap: $spacing-sm;
+    text-align: left;
   }
 }
 
@@ -37,6 +40,8 @@
   font-weight: $font-weight-bold;
   font-size: $font-size-sm;
   color: var(--text-primary);
+  text-align: left;
+  justify-self: flex-start;
 
   .hash {
     color: var(--text-tertiary);
@@ -46,21 +51,29 @@
 .dueDate {
   font-size: $font-size-sm;
   color: var(--text-tertiary);
+  text-align: center;
+  justify-self: center;
+  white-space: nowrap;
 
   @media (max-width: 768px) {
     grid-column: 1;
     grid-row: 2;
+    text-align: left;
+    justify-self: flex-start;
   }
 }
 
 .clientName {
   font-size: $font-size-sm;
   color: var(--text-secondary);
+  text-align: center;
+  justify-self: center;
 
   @media (max-width: 768px) {
     grid-column: 2;
     grid-row: 1;
     text-align: right;
+    justify-self: flex-end;
   }
 }
 
@@ -68,25 +81,36 @@
   font-size: $font-size-lg;
   font-weight: $font-weight-bold;
   color: var(--text-primary);
+  text-align: center;
+  justify-self: center;
 
   @media (max-width: 768px) {
     grid-column: 1;
     grid-row: 3;
+    text-align: left;
+    justify-self: flex-start;
   }
 }
 
 .status {
+  text-align: center;
+  justify-self: center;
+
   @media (max-width: 768px) {
     grid-column: 2;
     grid-row: 2;
-    justify-self: end;
+    text-align: right;
+    justify-self: flex-end;
   }
 }
 
 .arrow {
   display: flex;
   align-items: center;
+  justify-content: center;
   color: var(--primary-color);
+  text-align: center;
+  justify-self: center;
 
   @media (max-width: 768px) {
     display: none;

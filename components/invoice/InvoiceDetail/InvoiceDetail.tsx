@@ -1,18 +1,19 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Invoice } from '@/types/invoice';
-import { formatCurrency, formatDate } from '@/utils/formatters';
-import InvoiceStatus from '../InvoiceStatus';
-import Button from '../../common/Button';
-import Modal from '../../common/Modal';
-import styles from './InvoiceDetail.module.scss';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Invoice } from "@/types/invoice";
+import { formatCurrency, formatDate } from "@/utils/formatters";
+import InvoiceStatus from "../InvoiceStatus";
+import Button from "../../common/Button";
+import styles from "./InvoiceDetail.module.scss";
+import DeleteModal from "@/components/common/DeleteModal/DeleteModal";
 
 export interface InvoiceDetailProps {
   invoice: Invoice;
   onDelete: () => void;
   onMarkAsPaid: () => void;
+  onEdit: () => void;
   isDeleting?: boolean;
   isUpdating?: boolean;
 }
@@ -21,6 +22,7 @@ export default function InvoiceDetail({
   invoice,
   onDelete,
   onMarkAsPaid,
+  onEdit,
   isDeleting = false,
   isUpdating = false,
 }: InvoiceDetailProps) {
@@ -28,7 +30,7 @@ export default function InvoiceDetail({
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const handleEdit = () => {
-    router.push(`/invoices/edit/${invoice._id}`);
+    onEdit();
   };
 
   const handleDeleteClick = () => {
@@ -60,7 +62,7 @@ export default function InvoiceDetail({
           >
             Delete
           </Button>
-          {invoice.status !== 'paid' && (
+          {invoice.status !== "paid" && (
             <Button
               variant="primary"
               onClick={onMarkAsPaid}
@@ -133,8 +135,12 @@ export default function InvoiceDetail({
               <div key={index} className={styles.tableRow}>
                 <span className={styles.itemName}>{item.name}</span>
                 <span className={styles.qty}>{item.quantity}</span>
-                <span className={styles.price}>{formatCurrency(item.price)}</span>
-                <span className={styles.total}>{formatCurrency(item.total)}</span>
+                <span className={styles.price}>
+                  {formatCurrency(item.price)}
+                </span>
+                <span className={styles.total}>
+                  {formatCurrency(item.total)}
+                </span>
               </div>
             ))}
           </div>
@@ -149,11 +155,11 @@ export default function InvoiceDetail({
       </div>
 
       {/* Delete Confirmation Modal */}
-      <Modal
+      <DeleteModal
         isOpen={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
         title="Confirm Deletion"
-        size="small"
+        
       >
         <div className={styles.modalContent}>
           <p className={styles.modalText}>
@@ -164,7 +170,9 @@ export default function InvoiceDetail({
             <Button
               variant="secondary"
               onClick={() => setShowDeleteModal(false)}
-              fullWidth
+              
+              className={styles.cancel}
+
             >
               Cancel
             </Button>
@@ -172,14 +180,14 @@ export default function InvoiceDetail({
               variant="danger"
               onClick={handleConfirmDelete}
               loading={isDeleting}
-              fullWidth
+             
+
             >
               Delete
             </Button>
           </div>
         </div>
-      </Modal>
+      </DeleteModal>
     </div>
   );
 }
-

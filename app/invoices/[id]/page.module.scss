@@ -1,12 +1,15 @@
-@use "../../../styles/variables" as *;
-@use "../../../styles/mixins" as *;
-
 .page {
-  padding: 2rem;
+  padding: 0rem 3rem;
   max-width: 100%;
   margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
 
-  @include mobile {
-    padding: 1.5rem 1rem;
+  @media (max-width: 768px) {
+    padding: 1.5rem;
   }
+}
+
+body[data-theme="dark"] .page {
+  background-color: #141625;
 }

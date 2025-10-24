@@ -1,15 +1,22 @@
 .overlay {
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 1000;
   animation: fadeIn 0.2s ease;
+
+  &[data-variant="left"] {
+    left: var(--sidebar-width, 100px);
+  }
+
+  &[data-variant="center"] {
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 @keyframes fadeIn {
@@ -22,22 +29,55 @@
 }
 
 .modal {
+  position: fixed;
+  top: var(--modal-top-offset, 0);
   background-color: var(--bg-primary);
-  border-radius: 0.5rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  max-width: 90vw;
-  max-height: 90vh;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   overflow-y: auto;
-  animation: slideUp 0.3s ease;
+  -webkit-overflow-scrolling: touch;
+  z-index: 1001;
+
+  &[data-variant="left"] {
+    left: calc(var(--sidebar-width, 100px));
+    height: calc(100vh - var(--modal-top-offset, 0));
+    width: 50vw;
+    max-width: 50%;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    animation: slideInLeft 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  &[data-variant="center"] {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 1rem;
+    animation: fadeInScale 0.2s ease;
+  }
 }
 
-@keyframes slideUp {
+@keyframes slideInLeft {
   from {
-    transform: translateY(20px);
+    transform: translateX(-100%);
+    opacity: 0.98;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    transform: translate(-50%, -50%) scale(0.95);
     opacity: 0;
   }
   to {
-    transform: translateY(0);
+    transform: translate(-50%, -50%) scale(1);
     opacity: 1;
   }
 }
@@ -56,6 +96,7 @@
   color: var(--text-primary);
 }
 
+.closeButton,
 .closeBtn {
   background: none;
   border: none;
@@ -71,6 +112,8 @@
 
 .content {
   padding: 1.5rem;
+  /* Ensure content stretches full width of modal container */
+  box-sizing: border-box;
 }
 
 .footer {
@@ -79,4 +122,19 @@
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
+}
+
+/* Responsive: on small screens the sidebar becomes top bar — let modal/overlay cover entire viewport */
+@media (max-width: 768px) {
+  .overlay {
+    left: 0;
+  }
+
+  .modal {
+    left: 0;
+    width: 100vw;
+    max-width: 100%;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+  }
 }

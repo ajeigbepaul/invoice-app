@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import InvoiceDetail from "@/components/invoice/InvoiceDetail";
 import GoBack from "@/components/common/GoBack";
-import { Invoice, InvoiceStatus } from "@/types/invoice";
+import { Invoice, InvoiceStatus, UpdateInvoiceInput } from "@/types/invoice";
 import styles from "./page.module.scss";
+import EditInvoiceModal from "@/components/invoice/EditInvoiceModal/EditInvoiceModal";
 
 // Mock data - this will be replaced with API calls later
 const mockInvoice: Invoice = {
@@ -48,6 +49,7 @@ export default function InvoiceDetailPage({
   params: { id: string };
 }) {
   const router = useRouter();
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [invoice, setInvoice] = useState<Invoice>(mockInvoice);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -85,8 +87,29 @@ export default function InvoiceDetailPage({
         invoice={invoice}
         onDelete={handleDelete}
         onMarkAsPaid={handleMarkAsPaid}
+        onEdit={() => setIsEditModalOpen(true)}
         isDeleting={isDeleting}
         isUpdating={isUpdating}
+      />
+
+      <EditInvoiceModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        onSubmit={async (updatedInvoice: UpdateInvoiceInput) => {
+          try {
+            setIsUpdating(true);
+            // TODO: Implement update functionality
+            console.log("Update invoice:", updatedInvoice);
+            setInvoice((prev) => ({ ...prev, ...updatedInvoice }));
+            setIsEditModalOpen(false);
+          } catch (error) {
+            console.error("Error updating invoice:", error);
+          } finally {
+            setIsUpdating(false);
+          }
+        }}
+        invoice={invoice}
+        isSubmitting={isUpdating}
       />
     </div>
   );

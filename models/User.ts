@@ -26,13 +26,13 @@ const UserSchema = new Schema(
     timestamps: true,
     toJSON: {
       transform: (_, ret) => {
-        delete ret.password;
+        delete (ret as any).password;
         return ret;
       },
     },
     toObject: {
       transform: (_, ret) => {
-        delete ret.password;
+        delete (ret as any).password;
         return ret;
       },
     },

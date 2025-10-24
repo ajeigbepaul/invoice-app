@@ -1,5 +1,5 @@
 // src/types/invoice.ts
-export type InvoiceStatus = 'paid' | 'pending' | 'draft';
+export type InvoiceStatus = "paid" | "pending" | "draft";
 
 export interface InvoiceItem {
   name: string;
@@ -47,9 +47,5 @@ export interface CreateInvoiceInput {
 
 export interface UpdateInvoiceInput extends Partial<CreateInvoiceInput> {
   status?: InvoiceStatus;
+  total?: number;
 }
-
-
-
-
-
