@@ -15,6 +15,7 @@ body {
   --bg-primary: #f8f8f8;
   --bg-secondary: #ffffff;
   --bg-disabled: #f0f0f0;
+   --bg-tertiary: #7e88c3;
 
   --border-color: #dfe3fa;
 
@@ -38,6 +39,7 @@ body[data-theme="dark"] {
   --bg-primary: #141625;
   --bg-secondary: #1e2139;
   --bg-disabled: #252945;
+ 
 
   --border-color: #252945;
 

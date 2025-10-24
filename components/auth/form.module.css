@@ -85,3 +85,48 @@
   opacity: 0.7;
   cursor: not-allowed;
 }
+
+.passwordStrengthContainer {
+  margin-top: 12px;
+  padding: 12px;
+  background-color: #f7fafc;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.strengthCriterion {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #4a5568;
+}
+
+.criterionMet {
+  color: #22863a;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background-color: #d4edda;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.criterionUnmet {
+  color: #cb2431;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background-color: #ffeaea;
+  border-radius: 50%;
+  flex-shrink: 0;
+}

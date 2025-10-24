@@ -356,7 +356,7 @@ export default function EditInvoiceModal({
                 <label className={styles.label}>Invoice Date</label>
                 <input
                   type="date"
-                  value={formatDate(invoice.createdAt)}
+                  value={invoice.createdAt.split('T')[0]}
                   className={styles.input}
                   required
                   disabled

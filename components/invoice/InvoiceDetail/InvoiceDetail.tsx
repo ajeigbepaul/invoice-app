@@ -52,7 +52,7 @@ export default function InvoiceDetail({
         </div>
 
         <div className={styles.actions}>
-          <Button variant="secondary" onClick={handleEdit}>
+          <Button variant="secondary" className={styles.editBtn} onClick={handleEdit}>
             Edit
           </Button>
           <Button

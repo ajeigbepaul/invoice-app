@@ -190,3 +190,25 @@ export const validateLogin = (email: string, password: string): ValidationResult
 
   return new ValidationResult(errors.length === 0, errors);
 };
+
+export interface PasswordStrengthCriteria {
+  minLength: boolean;
+  uppercase: boolean;
+  lowercase: boolean;
+  number: boolean;
+  specialChar: boolean;
+}
+
+export const validatePasswordStrength = (password: string): PasswordStrengthCriteria => {
+  return {
+    minLength: password.length >= 8,
+    uppercase: /[A-Z]/.test(password),
+    lowercase: /[a-z]/.test(password),
+    number: /[0-9]/.test(password),
+    specialChar: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password),
+  };
+};
+
+export const isPasswordStrong = (criteria: PasswordStrengthCriteria): boolean => {
+  return Object.values(criteria).every(value => value === true);
+};

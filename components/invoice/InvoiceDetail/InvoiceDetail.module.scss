@@ -43,15 +43,25 @@ body[data-theme="dark"] .statusBar {
   font-size: 0.875rem;
   color: var(--text-secondary);
 }
+.editBtn {
+  background-color: var(--bg-disabled)!important;
+}
 
 .actions {
   display: flex;
   gap: 1rem;
 
   @media (max-width: 640px) {
-    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    :global(button) {
+      font-size: 0.75rem;
+      padding: 0.5rem 0.75rem;
+    }
   }
 }
+
 
 // Invoice Details
 .details {

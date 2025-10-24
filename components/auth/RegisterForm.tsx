@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { validateRegistration, ValidationError } from "@/utils/validation";
+import { validateRegistration, ValidationError, validatePasswordStrength, isPasswordStrong, PasswordStrengthCriteria } from "@/utils/validation";
 import toast from "react-hot-toast";
 import styles from "./form.module.css";
 
@@ -14,6 +14,13 @@ export default function RegisterForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [passwordStrength, setPasswordStrength] = useState<PasswordStrengthCriteria>({
+    minLength: false,
+    uppercase: false,
+    lowercase: false,
+    number: false,
+    specialChar: false,
+  });
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -118,7 +125,9 @@ export default function RegisterForm() {
           id="password"
           value={password}
           onChange={(e) => {
-            setPassword(e.target.value);
+            const newPassword = e.target.value;
+            setPassword(newPassword);
+            setPasswordStrength(validatePasswordStrength(newPassword));
             if (errors.password) setErrors({ ...errors, password: "" });
           }}
           placeholder="••••••••"
@@ -129,6 +138,40 @@ export default function RegisterForm() {
         />
         {errors.password && (
           <span className={styles.error}>{errors.password}</span>
+        )}
+        {password && (
+          <div className={styles.passwordStrengthContainer}>
+            <div className={styles.strengthCriterion}>
+              <span className={passwordStrength.minLength ? styles.criterionMet : styles.criterionUnmet}>
+                ✓
+              </span>
+              <span>At least 8 characters</span>
+            </div>
+            <div className={styles.strengthCriterion}>
+              <span className={passwordStrength.uppercase ? styles.criterionMet : styles.criterionUnmet}>
+                ✓
+              </span>
+              <span>At least one uppercase letter</span>
+            </div>
+            <div className={styles.strengthCriterion}>
+              <span className={passwordStrength.lowercase ? styles.criterionMet : styles.criterionUnmet}>
+                ✓
+              </span>
+              <span>At least one lowercase letter</span>
+            </div>
+            <div className={styles.strengthCriterion}>
+              <span className={passwordStrength.number ? styles.criterionMet : styles.criterionUnmet}>
+                ✓
+              </span>
+              <span>At least one number</span>
+            </div>
+            <div className={styles.strengthCriterion}>
+              <span className={passwordStrength.specialChar ? styles.criterionMet : styles.criterionUnmet}>
+                ✓
+              </span>
+              <span>At least one special character (!@#$%^&*)</span>
+            </div>
+          </div>
         )}
       </div>
 
