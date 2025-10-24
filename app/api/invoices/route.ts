@@ -12,6 +12,7 @@ import {
   calculateTotal,
 } from '@/utils/formatters';
 import { CreateInvoiceInput } from '@/types/invoice';
+export const dynamic = "force-dynamic";
 
 // GET /api/invoices - Get all invoices for the logged-in user
 export async function GET(request: NextRequest) {

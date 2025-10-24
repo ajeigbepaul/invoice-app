@@ -6,6 +6,7 @@ import InvoiceModel from "@/models/Invoice";
 import { ApiResponse } from "@/types/api";
 import { validateInvoiceInput } from "@/utils/validation";
 import { UpdateInvoiceInput } from "@/types/invoice";
+export const dynamic = "force-dynamic";
 
 export async function GET(
   request: NextRequest,
