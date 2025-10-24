@@ -112,12 +112,13 @@ body[data-theme="dark"] .input {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr auto;
   gap: 1.5rem;
-  align-items: end;
+  align-items: flex-end;
   margin-bottom: 1rem;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 0.75rem;
+    align-items:stretch;
   }
 }
 
@@ -139,8 +140,9 @@ body[data-theme="dark"] .input {
 body[data-theme="dark"] .totalDisplay {
   background-color: #252945;
   border-color: rgba(255, 255, 255, 0.1);
-  color: var(--bg-primary);
+  color: var(--text-primary);
 }
+
 
 .removeButton {
   appearance: none;
@@ -186,6 +188,20 @@ body[data-theme="dark"] .removeButton {
   background-color: #373b53 !important;
   color: var(--text-secondary) !important;
   border: 1px solid transparent !important;
+}
+
+.trashIcon {
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+}
+
+body[data-theme="dark"] .removeButton .trashIcon {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.removeButton:hover .trashIcon {
+  color: white;
 }
 
 .draftButton:hover {

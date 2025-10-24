@@ -1,6 +1,7 @@
 // src/components/common/EmptyState/EmptyState.tsx
 import React from 'react';
 import styles from './EmptyState.module.scss';
+import Image from 'next/image';
 
 export interface EmptyStateProps {
   title?: string;
@@ -20,7 +21,8 @@ export default function EmptyState({
       ) : (
         <div className={styles.illustration}>
           {/* Empty state illustration */}
-          <svg width="242" height="200" xmlns="http://www.w3.org/2000/svg">
+          <Image src='/emptyicon.svg' alt='Empty State' width={242} height={200}  />
+          {/* <svg width="242" height="200" xmlns="http://www.w3.org/2000/svg">
             <g fill="none" fillRule="evenodd">
               <ellipse fill="#0C0E16" opacity=".06" cx="121" cy="185.5" rx="83" ry="14.5" />
               <g transform="translate(0 8)">
@@ -39,7 +41,7 @@ export default function EmptyState({
                 />
               </g>
             </g>
-          </svg>
+          </svg> */}
         </div>
       )}
       <h2 className={styles.title}>{title}</h2>

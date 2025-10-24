@@ -1,22 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Invoice,
   CreateInvoiceInput,
   Address,
   InvoiceItem,
+  InvoiceStatus,
 } from "@/types/invoice";
 import { formatDate } from "@/utils/formatters";
+import { validateInvoiceInput } from "@/utils/validation";
 import Modal from "@/components/common/Modal";
 import Button from "@/components/common/Button";
+import { useFormValidation } from "@/hooks/useFormValidation";
+import { useCreateInvoice } from "@/hooks/useInvoices";
 import styles from "./CreateInvoiceModal.module.scss";
+import { FaTrash } from "react-icons/fa";
 
 export interface CreateInvoiceModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (invoice: CreateInvoiceInput) => void;
+  onSubmit?: (invoice: CreateInvoiceInput) => void;
   isSubmitting?: boolean;
+  onSuccess?: () => void;
 }
 
 export default function CreateInvoiceModal({
@@ -24,13 +31,20 @@ export default function CreateInvoiceModal({
   onClose,
   onSubmit,
   isSubmitting = false,
+  onSuccess,
 }: CreateInvoiceModalProps) {
-  const [formData, setFormData] = useState<CreateInvoiceInput>({
+  const router = useRouter();
+  const { errors, setValidationErrors, clearErrors, getFieldError } =
+    useFormValidation();
+  const { mutateAsync: createInvoice, isPending } = useCreateInvoice();
+
+  const initialFormData: CreateInvoiceInput = {
     description: "",
     paymentTerms: 30,
     clientName: "",
     clientEmail: "",
     status: "draft",
+    createdAt: formatDate(new Date().toISOString()),
     senderAddress: {
       street: "19 Union Terrace",
       city: "London",
@@ -51,7 +65,9 @@ export default function CreateInvoiceModal({
         total: 0,
       },
     ],
-  });
+  };
+
+  const [formData, setFormData] = useState<CreateInvoiceInput>(initialFormData);
 
   const handleInputChange = (
     field: string,
@@ -125,41 +141,49 @@ export default function CreateInvoiceModal({
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // total is computed here if needed, but CreateInvoiceInput doesn't include a top-level `total` field,
-    // so pass formData directly to onSubmit.
-    onSubmit(formData);
+    try {
+      const invoiceData = {
+        ...formData,
+        status: "pending" as InvoiceStatus,
+      };
+      
+      if (onSubmit) {
+        onSubmit(invoiceData);
+      } else {
+        await createInvoice(invoiceData);
+        setFormData(initialFormData);
+        onClose();
+        onSuccess?.();
+      }
+    } catch (error) {
+      console.error("Error creating invoice:", error);
+    }
+  };
+
+  const handleSaveAsDraft = async () => {
+    try {
+      const draftData = {
+        ...formData,
+        status: "draft" as InvoiceStatus,
+      };
+      
+      if (onSubmit) {
+        onSubmit(draftData);
+      } else {
+        await createInvoice(draftData);
+        setFormData(initialFormData);
+        onClose();
+        onSuccess?.();
+      }
+    } catch (error) {
+      console.error("Error saving draft:", error);
+    }
   };
 
   const handleDiscard = () => {
-    setFormData({
-      description: "",
-      paymentTerms: 30,
-      clientName: "",
-      clientEmail: "",
-      status: "draft",
-      senderAddress: {
-        street: "19 Union Terrace",
-        city: "London",
-        postCode: "E1 3EZ",
-        country: "United Kingdom",
-      },
-      clientAddress: {
-        street: "",
-        city: "",
-        postCode: "",
-        country: "",
-      },
-      items: [
-        {
-          name: "",
-          quantity: 1,
-          price: 0,
-          total: 0,
-        },
-      ],
-    });
+    setFormData(initialFormData);
     onClose();
   };
 
@@ -330,7 +354,10 @@ export default function CreateInvoiceModal({
                 <label className={styles.label}>Invoice Date</label>
                 <input
                   type="date"
-                  value={formatDate(new Date().toISOString())}
+                  value={formData.createdAt}
+                  onChange={(e) =>
+                    handleInputChange("createdAt", e.target.value)
+                  }
                   className={styles.input}
                   required
                 />
@@ -431,14 +458,7 @@ export default function CreateInvoiceModal({
                     onClick={() => handleRemoveItem(index)}
                     className={styles.removeButton}
                   >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path
-                        d="M12 4L4 12M4 4L12 12"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                    </svg>
+                    <FaTrash className={styles.trashIcon} />
                   </button>
                 )}
               </div>
@@ -461,17 +481,25 @@ export default function CreateInvoiceModal({
             onClick={handleDiscard}
             className={styles.discard}
             fullWidth
+            disabled={isPending || isSubmitting}
           >
             Discard
           </Button>
-          <Button type="submit" variant="secondary" className={styles.draftButton} fullWidth>
+          <Button
+            type="button"
+            variant="secondary"
+            className={styles.draftButton}
+            fullWidth
+            loading={isPending}
+            onClick={() => handleSaveAsDraft()}
+          >
             Save as Draft
           </Button>
           <Button
             type="submit"
             variant="primary"
             fullWidth
-            loading={isSubmitting}
+            loading={isPending || isSubmitting}
           >
             Save & Send
           </Button>

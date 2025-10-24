@@ -13,11 +13,12 @@ import DeleteModal from "@/components/common/DeleteModal/DeleteModal";
 import deleteStyles from "@/components/common/DeleteModal/DeleteModal.module.scss";
 import Button from "@/components/common/Button";
 import styles from "./EditInvoiceModal.module.scss";
+import { useUpdateInvoice, useDeleteInvoice } from "@/hooks/useInvoices";
 
 export interface EditInvoiceModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (invoice: UpdateInvoiceInput) => void;
+  onSubmit?: (invoice: UpdateInvoiceInput) => void;
   invoice: Invoice;
   isSubmitting?: boolean;
   onDelete?: () => void;
@@ -34,6 +35,8 @@ export default function EditInvoiceModal({
   isDeleting = false,
 }: EditInvoiceModalProps) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { mutateAsync: updateInvoice, isPending: isUpdatingApi } = useUpdateInvoice();
+  const { mutateAsync: deleteInvoiceApi, isPending: isDeletingApi } = useDeleteInvoice();
   const [formData, setFormData] = useState<UpdateInvoiceInput>({
     description: invoice.description,
     paymentTerms: invoice.paymentTerms,
@@ -133,16 +136,41 @@ export default function EditInvoiceModal({
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const total = (formData.items || []).reduce(
-      (sum, item) => sum + item.total,
-      0
-    );
-    onSubmit({
-      ...formData,
-      total,
-    });
+    try {
+      const total = (formData.items || []).reduce(
+        (sum, item) => sum + item.total,
+        0
+      );
+      const updatedData = {
+        ...formData,
+        total,
+      };
+      
+      if (onSubmit) {
+        onSubmit(updatedData);
+      } else {
+        await updateInvoice({ id: invoice._id, data: updatedData });
+        onClose();
+      }
+    } catch (error) {
+      console.error("Error updating invoice:", error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      if (onDelete) {
+        onDelete();
+      } else {
+        await deleteInvoiceApi(invoice._id);
+        setShowDeleteModal(false);
+        onClose();
+      }
+    } catch (error) {
+      console.error("Error deleting invoice:", error);
+    }
   };
 
   const handleCancel = () => {
@@ -158,6 +186,8 @@ export default function EditInvoiceModal({
     });
     onClose();
   };
+
+  const isLoading = isUpdatingApi || isSubmitting || isDeletingApi || isDeleting;
 
   return (
     <Modal
@@ -329,6 +359,7 @@ export default function EditInvoiceModal({
                   value={formatDate(invoice.createdAt)}
                   className={styles.input}
                   required
+                  disabled
                 />
               </div>
               <div className={styles.field}>
@@ -456,6 +487,7 @@ export default function EditInvoiceModal({
             variant="secondary"
             onClick={handleCancel}
             fullWidth
+            disabled={isLoading}
           >
             Cancel
           </Button>
@@ -464,6 +496,7 @@ export default function EditInvoiceModal({
             variant="danger"
             onClick={() => setShowDeleteModal(true)}
             fullWidth
+            disabled={isLoading}
           >
             Delete
           </Button>
@@ -471,7 +504,7 @@ export default function EditInvoiceModal({
             type="submit"
             variant="primary"
             fullWidth
-            loading={isSubmitting}
+            loading={isUpdatingApi || isSubmitting}
           >
             Save Changes
           </Button>
@@ -491,17 +524,14 @@ export default function EditInvoiceModal({
             <Button
               variant="secondary"
               onClick={() => setShowDeleteModal(false)}
-              disabled={isDeleting}
+              disabled={isDeletingApi || isDeleting}
             >
               Cancel
             </Button>
             <Button
               variant="danger"
-              onClick={() => {
-                onDelete?.();
-                setShowDeleteModal(false);
-              }}
-              loading={isDeleting}
+              onClick={handleDelete}
+              loading={isDeletingApi || isDeleting}
             >
               Delete
             </Button>

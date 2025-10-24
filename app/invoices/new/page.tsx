@@ -6,11 +6,11 @@ import GoBack from "@/components/common/GoBack";
 import Button from "@/components/common/Button";
 import { CreateInvoiceInput, InvoiceStatus } from "@/types/invoice";
 import { generateInvoiceId, calculatePaymentDue } from "@/utils/formatters";
+import { useCreateInvoice } from "@/hooks/useInvoices";
 import styles from "./page.module.scss";
 
 export default function NewInvoicePage() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<CreateInvoiceInput>({
     description: "",
     paymentTerms: 30,
@@ -106,45 +106,33 @@ export default function NewInvoicePage() {
     }
   };
 
+  const { mutateAsync: createInvoice, isPending } = useCreateInvoice();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
 
     try {
-      // TODO: Replace with actual API call
-      console.log("Creating invoice:", formData);
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
+      const invoiceData = {
+        ...formData,
+        status: "pending" as InvoiceStatus,
+      };
+      await createInvoice(invoiceData);
       router.push("/invoices");
     } catch (error) {
       console.error("Error creating invoice:", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const handleSaveAsDraft = async () => {
-    setIsLoading(true);
-
     try {
       const draftData = {
         ...formData,
         status: "draft" as InvoiceStatus,
       };
-
-      // TODO: Replace with actual API call
-      console.log("Saving as draft:", draftData);
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
+      await createInvoice(draftData);
       router.push("/invoices");
     } catch (error) {
       console.error("Error saving draft:", error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -414,12 +402,12 @@ export default function NewInvoicePage() {
               type="button"
               variant="secondary"
               onClick={handleSaveAsDraft}
-              disabled={isLoading}
+              disabled={isPending}
             >
               Save as Draft
             </Button>
-            <Button type="submit" variant="primary" disabled={isLoading}>
-              {isLoading ? "Creating..." : "Create Invoice"}
+            <Button type="submit" variant="primary" disabled={isPending}>
+              {isPending ? "Creating..." : "Create Invoice"}
             </Button>
           </div>
         </div>

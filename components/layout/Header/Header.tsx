@@ -76,19 +76,7 @@ export default function Header({
       <CreateInvoiceModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}
-        onSubmit={async (invoice: CreateInvoiceInput) => {
-          try {
-            setIsSubmitting(true);
-            // TODO: Implement create functionality
-            console.log("Create invoice:", invoice);
-            setIsCreateModalOpen(false);
-          } catch (error) {
-            console.error("Error creating invoice:", error);
-          } finally {
-            setIsSubmitting(false);
-          }
-        }}
-        isSubmitting={isSubmitting}
+        onSuccess={() => setIsCreateModalOpen(false)}
       />
     </header>
   );

@@ -1,20 +1,21 @@
 import { ApiResponse } from "@/types/api";
-import { getSession } from "next-auth/react";
 
 const API_BASE_URL = "/api";
 
 export class ApiClientError extends Error {
   status?: number;
+  validationErrors?: any[];
 
-  constructor(message: string, status?: number) {
+  constructor(message: string, status?: number, validationErrors?: any[]) {
     super(message);
     this.name = "ApiClientError";
     this.status = status;
+    this.validationErrors = validationErrors;
   }
 }
 
 /**
- * Generic API request handler with token interceptor
+ * Generic API request handler with automatic cookie-based authentication
  */
 async function apiRequest<T>(
   endpoint: string,
@@ -22,38 +23,35 @@ async function apiRequest<T>(
 ): Promise<T> {
   const url = `${API_BASE_URL}${endpoint}`;
 
-  // Get session and add token to headers
-  const session = await getSession();
-
   const config: RequestInit = {
     ...options,
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
       ...options.headers,
     },
   };
 
-  // Add authorization token if session exists
-  if (session?.user) {
-    config.headers = {
-      ...config.headers,
-      Authorization: `Bearer ${session}`,
-    };
-  }
-
   try {
     const response = await fetch(url, config);
     const data: ApiResponse<T> = await response.json();
 
     if (!response.ok) {
+      const validationErrors = Array.isArray(data.data) ? data.data : undefined;
       throw new ApiClientError(
         data.error || data.message || "An error occurred",
-        response.status
+        response.status,
+        validationErrors
       );
     }
 
     if (!data.success) {
-      throw new ApiClientError(data.error || data.message || "Request failed");
+      const validationErrors = Array.isArray(data.data) ? data.data : undefined;
+      throw new ApiClientError(
+        data.error || data.message || "Request failed",
+        undefined,
+        validationErrors
+      );
     }
 
     return data.data as T;

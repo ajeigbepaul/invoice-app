@@ -1,25 +1,24 @@
 "use client";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import ThemeToggle from "../ThemeToggle";
 import { getInitials } from "@/utils/formatters";
 import styles from "./Sidebar.module.scss";
 import Image from "next/image";
+import { FaRegUserCircle } from "react-icons/fa";
 
 export default function Sidebar() {
   const { data: session } = useSession();
+
+  const handleLogout = () => {
+    signOut({ redirect: true, callbackUrl: "/auth/login" });
+  };
 
   return (
     <aside className={styles.sidebar}>
       <div className={styles.top}>
         <Link href="/" className={styles.logo}>
           <Image src='/icon.svg' alt='Logo' width={38} height={38}  />
-          {/* <svg width="28" height="26" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M20.513 0C24.965 2.309 28 6.91 28 12.21 28 19.826 21.732 26 14 26S0 19.826 0 12.21C0 6.91 3.035 2.309 7.487 0L14 12.21z"
-              fill="var(--primary-color)"
-            />
-          </svg> */}
         </Link>
       </div>
 
@@ -27,9 +26,13 @@ export default function Sidebar() {
         <ThemeToggle />
         <div className={styles.divider}></div>
         {session?.user && (
-          <div className={styles.avatar}>
-            {session.user.name ? getInitials(session.user.name) : "U"}
-          </div>
+          <button
+            onClick={handleLogout}
+            className={styles.avatar}
+            title="Click to logout"
+          >
+            {session.user.name ? getInitials(session.user.name) : <FaRegUserCircle />}
+          </button>
         )}
       </div>
     </aside>
