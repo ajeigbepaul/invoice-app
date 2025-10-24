@@ -59,6 +59,7 @@ export default function InvoiceDetail({
             variant="danger"
             onClick={handleDeleteClick}
             loading={isDeleting}
+            className={styles.deleteBtn}
           >
             Delete
           </Button>
@@ -138,7 +139,7 @@ export default function InvoiceDetail({
                 <span className={styles.price}>
                   {formatCurrency(item.price)}
                 </span>
-                <span className={styles.total}>
+                <span className={styles.totalName}>
                   {formatCurrency(item.total)}
                 </span>
               </div>

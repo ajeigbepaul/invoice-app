@@ -45,17 +45,21 @@
 }
 
 .field {
-  margin-bottom: 1.5rem;
-
+  margin-bottom: 1rem;
   &:last-child {
     margin-bottom: 0;
   }
+}
+
+.totalField {
+  margin-bottom: 1rem;
 }
 
 .fieldRow {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1.5rem;
+  
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -68,7 +72,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-tertiary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .input {
@@ -185,9 +189,15 @@ body[data-theme="dark"] .removeButton {
 
 .draftButton {
   /* Ensure this overrides the generic .secondary button styles */
-  background-color: #373b53 !important;
-  color: var(--text-secondary) !important;
+  background-color: var(--bg-extra) !important;
+  color: var(--text-quinary) !important;
   border: 1px solid transparent !important;
+}
+
+body[data-theme="dark"] .draftButton {
+  background-color: var(--bg-tertiary)!important;
+  border:none!important;
+  color: var(--text-quaternary)!important;
 }
 
 .trashIcon {
@@ -208,9 +218,20 @@ body[data-theme="dark"] .removeButton .trashIcon {
   filter: brightness(1.03);
 }
 
+// .discard {
+//   background-color: #f9fafe !important;
+//   color: var(--text-secondary) !important;
+// }
 .discard {
-  background-color: #f9fafe !important;
-  color: var(--text-secondary) !important;
+  background-color: var(--bg-quaternary)!important;
+  color: var(--text-quaternary)!important;
+  border:none!important;
+}
+
+body[data-theme="dark"] .discard {
+  background-color: var(--bg-extra)!important;
+  border:none!important;
+  color: var(--text-tertiary)!important;
 }
 
 .addItemButton {

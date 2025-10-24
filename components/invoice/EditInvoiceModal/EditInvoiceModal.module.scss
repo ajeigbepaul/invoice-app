@@ -45,13 +45,21 @@
 }
 
 .field {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0rem;
 
   &:last-child {
     margin-bottom: 0;
   }
 }
+.totalField {
+  margin-bottom: 1rem;
+}
 
+.cancelBtn{
+  background-color: var(--bg-quaternary)!important;
+  color: var(--text-quaternary)!important;
+  // border:none!important;
+}
 .fieldRow {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -216,6 +224,8 @@ body[data-theme="dark"] .addItemButton {
 
 .actions {
   display: flex;
+  align-items: center;
+  justify-content:end;
   gap: 1rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);

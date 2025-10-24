@@ -446,7 +446,7 @@ export default function CreateInvoiceModal({
                     required
                   />
                 </div>
-                <div className={styles.field}>
+                <div className={styles.totalField}>
                   <label className={styles.label}>Total</label>
                   <div className={styles.totalDisplay}>
                     £ {item.total.toFixed(2)}

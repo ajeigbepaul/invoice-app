@@ -446,7 +446,7 @@ export default function EditInvoiceModal({
                     required
                   />
                 </div>
-                <div className={styles.field}>
+                <div className={styles.totalField}>
                   <label className={styles.label}>Total</label>
                   <div className={styles.totalDisplay}>
                     £ {item.total.toFixed(2)}
@@ -486,24 +486,17 @@ export default function EditInvoiceModal({
             type="button"
             variant="secondary"
             onClick={handleCancel}
-            fullWidth
+           
             disabled={isLoading}
+            className={styles.cancelBtn}
           >
             Cancel
           </Button>
-          <Button
-            type="button"
-            variant="danger"
-            onClick={() => setShowDeleteModal(true)}
-            fullWidth
-            disabled={isLoading}
-          >
-            Delete
-          </Button>
+          
           <Button
             type="submit"
             variant="primary"
-            fullWidth
+           
             loading={isUpdatingApi || isSubmitting}
           >
             Save Changes

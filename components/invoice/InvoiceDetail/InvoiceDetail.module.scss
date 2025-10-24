@@ -31,7 +31,7 @@ body[data-theme="dark"] .statusBar {
 .statusInfo {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.0rem;
   flex: 1;
 
   @media (max-width: 640px) {
@@ -44,12 +44,18 @@ body[data-theme="dark"] .statusBar {
   color: var(--text-secondary);
 }
 .editBtn {
-  background-color: var(--bg-disabled)!important;
+  background-color: var(--bg-quaternary)!important;
+  color: var(--text-quaternary)!important;
+  border:none!important;
+}
+.deleteBtn {
+  background-color: var( --danger-color)!important;
+  color: white!important;
 }
 
 .actions {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
 
   @media (max-width: 640px) {
     gap: 0.5rem;
@@ -295,7 +301,7 @@ body[data-theme="dark"] .itemName {
 
 .total {
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   text-align: right;
   font-weight: 500;
 
@@ -312,6 +318,24 @@ body[data-theme="dark"] .total {
   color: var(--text-primary);
 }
 
+.totalName {
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: right;
+  font-weight: 500;
+
+  @media (max-width: 640px) {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+body[data-theme="dark"] .totalName {
+  color: var(--text-primary);
+}
 .tableFooter {
   display: flex;
   align-items: center;

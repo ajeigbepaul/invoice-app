@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState,use } from "react";
+import React, { useState, use } from "react";
 import { useRouter } from "next/navigation";
 import InvoiceDetail from "@/components/invoice/InvoiceDetail";
 import GoBack from "@/components/common/GoBack";
@@ -15,13 +15,12 @@ import {
 } from "@/hooks/useInvoices";
 import Loader from "@/components/common/Loader";
 
-
 export default function InvoiceDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const {id} = use(params)
+  const { id } = use(params);
   const router = useRouter();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -99,8 +98,10 @@ export default function InvoiceDetailPage({
             console.error("Error updating invoice:", error);
           }
         }}
+        onDelete={handleDelete}
         invoice={invoice}
         isSubmitting={isUpdating}
+        isDeleting={isDeleting}
       />
     </div>
   );
