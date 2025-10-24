@@ -101,11 +101,6 @@ export default function InvoiceDetail({
           </div>
 
           <div className={styles.metaItem}>
-            <span className={styles.metaLabel}>Payment Due</span>
-            <p className={styles.metaValue}>{formatDate(invoice.paymentDue)}</p>
-          </div>
-
-          <div className={styles.metaItem}>
             <span className={styles.metaLabel}>Bill To</span>
             <p className={styles.metaValue}>{invoice.clientName}</p>
             <address className={styles.clientAddress}>
@@ -120,6 +115,15 @@ export default function InvoiceDetail({
             <span className={styles.metaLabel}>Sent to</span>
             <p className={styles.metaValue}>{invoice.clientEmail}</p>
           </div>
+
+          <div className={styles.metaItem}>
+            <span className={styles.metaLabel}>Payment Due</span>
+            <p className={styles.metaValue}>{formatDate(invoice.paymentDue)}</p>
+          </div>
+
+          
+
+          
         </div>
 
         {/* Items Table */}

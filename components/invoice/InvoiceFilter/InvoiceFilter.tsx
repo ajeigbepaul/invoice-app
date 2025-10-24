@@ -1,19 +1,19 @@
-'use client';
+"use client";
 
-import React, { useState, useRef, useEffect } from 'react';
-import { InvoiceStatus } from '@/types/invoice';
-import styles from './InvoiceFilter.module.scss';
+import React, { useState, useRef, useEffect } from "react";
+import { InvoiceStatus } from "@/types/invoice";
+import styles from "./InvoiceFilter.module.scss";
 
 export interface InvoiceFilterProps {
-  selectedStatus: InvoiceStatus | 'all';
-  onStatusChange: (status: InvoiceStatus | 'all') => void;
+  selectedStatus: InvoiceStatus | "all";
+  onStatusChange: (status: InvoiceStatus | "all") => void;
 }
 
-const filterOptions: { value: InvoiceStatus | 'all'; label: string }[] = [
-  { value: 'all', label: 'All' },
-  { value: 'draft', label: 'Draft' },
-  { value: 'pending', label: 'Pending' },
-  { value: 'paid', label: 'Paid' },
+const filterOptions: { value: InvoiceStatus | "all"; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "draft", label: "Draft" },
+  { value: "pending", label: "Pending" },
+  { value: "paid", label: "Paid" },
 ];
 
 export default function InvoiceFilter({
@@ -25,17 +25,20 @@ export default function InvoiceFilter({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen]);
 
@@ -43,7 +46,7 @@ export default function InvoiceFilter({
     setIsOpen(!isOpen);
   };
 
-  const handleSelect = (status: InvoiceStatus | 'all') => {
+  const handleSelect = (status: InvoiceStatus | "all") => {
     onStatusChange(status);
     setIsOpen(false);
   };
@@ -56,15 +59,13 @@ export default function InvoiceFilter({
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
-        <span className={styles.label}>
-          Filter by status
-          <span className={styles.hideOnMobile}> </span>
-        </span>
+        <span className={styles.label}>Filter by status</span>
+
         <svg
           width="11"
           height="7"
           xmlns="http://www.w3.org/2000/svg"
-          className={`${styles.arrow} ${isOpen ? styles.open : ''}`}
+          className={`${styles.arrow} ${isOpen ? styles.open : ""}`}
         >
           <path
             d="M1 1l4.228 4.228L9.456 1"
@@ -95,4 +96,3 @@ export default function InvoiceFilter({
     </div>
   );
 }
-

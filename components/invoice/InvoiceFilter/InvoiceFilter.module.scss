@@ -20,13 +20,19 @@
   }
 }
 
+// .label {
+//   @include mobile {
+//     .hideOnMobile {
+//       display: none;
+//     }
+//   }
+// }
 .label {
   @include mobile {
-    .hideOnMobile {
-      display: none;
-    }
+    display: none;
   }
 }
+
 
 .arrow {
   color: var(--primary-color);

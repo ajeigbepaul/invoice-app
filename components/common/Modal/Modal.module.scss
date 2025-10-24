@@ -136,5 +136,17 @@
     max-width: 100%;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
+
+    &[data-variant="left"] {
+    left: 0;
+    height: calc(100vh - var(--modal-top-offset, 0));
+    width: 80vw;
+    max-width: 100%;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    animation: slideInLeft 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
   }
 }

@@ -141,7 +141,7 @@ body[data-theme="dark"] .invoiceId {
 .meta {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 1rem;
   margin-bottom: 2rem;
 
   @media (max-width: 640px) {
@@ -149,27 +149,44 @@ body[data-theme="dark"] .invoiceId {
   }
 }
 
+// .metaItem {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 0.5rem;
+
+//   &:nth-child(3) {
+//     grid-column: 1 / 2;
+
+//     @media (max-width: 640px) {
+//       grid-column: 1 / -1;
+//     }
+//   }
+
+//   &:nth-child(4) {
+//     grid-column: 2 / -1;
+
+//     @media (max-width: 640px) {
+//       grid-column: 1 / -1;
+//     }
+//   }
+// }
+
 .metaItem {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 
-  &:nth-child(3) {
-    grid-column: 1 / 2;
-
-    @media (max-width: 640px) {
+  @media (max-width: 640px) {
+    &:nth-child(3) {
       grid-column: 1 / -1;
     }
-  }
 
-  &:nth-child(4) {
-    grid-column: 2 / -1;
-
-    @media (max-width: 640px) {
+    &:nth-child(4) {
       grid-column: 1 / -1;
     }
   }
 }
+
 
 .metaLabel {
   font-size: 0.875rem;
