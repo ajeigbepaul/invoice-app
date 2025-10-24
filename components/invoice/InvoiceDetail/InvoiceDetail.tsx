@@ -185,6 +185,7 @@ export default function InvoiceDetail({
               variant="danger"
               onClick={handleConfirmDelete}
               loading={isDeleting}
+              className={styles.deleteBtn}
              
 
             >
