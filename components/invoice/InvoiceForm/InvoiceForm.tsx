@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./InvoiceForm.module.scss";
 import { Input } from "@/components/common";
-import { Select } from "@/components/common";
 
 interface InvoiceItem {
   id: string;
@@ -10,7 +9,7 @@ interface InvoiceItem {
   unitPrice: number;
 }
 
-interface InvoiceFormProps {
+export interface InvoiceFormProps {
   initialData?: {
     invoiceNumber?: string;
     clientName?: string;

@@ -1,2 +1,2 @@
 export { InvoiceForm } from "./InvoiceForm";
-export type { InvoiceFormProps, InvoiceItem } from "./InvoiceForm";
+export type { InvoiceFormProps} from "./InvoiceForm";
